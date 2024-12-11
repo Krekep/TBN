@@ -20,8 +20,8 @@ class BayesNode:
         self.cpt = cpt
         self.parents = parents
 
-    def get_cpt(self):
+    def get_cpt(self) -> dict[str | tuple[str, ...], list[float]]:
         return self.cpt
 
-    def get_parents(self):
+    def get_parents(self) -> Optional[list]:
         return self.parents

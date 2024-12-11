@@ -1,4 +1,4 @@
-from network import BayesNetwork, estimate
+from network import BayesNetwork, inference
 from node import BayesNode
 
 #
@@ -125,9 +125,9 @@ cbn.plot().draw(path="test.png")  # Отрисовываем полученну�
 samples = cbn.sampling(100_000)  # Чем больше, тем больше сходимость
 
 # Проверим вероятность того, что человек болен ковидом, если у него кашель и его госпитализировали
-prob_covid = estimate('Covid', 'True', {'Hospitalization': 'True', 'Cough': 'True'}, samples)
+prob_covid = inference('Covid', 'True', {'Hospitalization': 'True', 'Cough': 'True'}, samples)
 print(prob_covid)
 
 # Проверим вероятность того, что человек болен гриппом, если у него кашель и его госпитализировали
-prob_flu = estimate('Flu', 'True', {'Hospitalization': 'True', 'Cough': 'True'}, samples)
+prob_flu = inference('Flu', 'True', {'Hospitalization': 'True', 'Cough': 'True'}, samples)
 print(prob_flu)

@@ -3,7 +3,7 @@ import networkx as nx
 from node import BayesNode
 
 
-def estimate(node: str, x: str, e: dict, samples: dict) -> dict:
+def inference(node: str, x: str, e: dict, samples: dict) -> dict:
     """
     Estimate the probability of a node given a set of evidences (P(node=x|e))
 
@@ -140,22 +140,6 @@ class BayesNetwork:
             samples[i + 1] = s
         return samples
 
-    def train_model(self, X, y):
-        # Здесь нужно реализовать алгоритм обучения
-        # Например, используя Rejection Sampling или Ancestral Sampling
-
-        # Пример с использованием Rejection Sampling
-        num_samples = 10000
-        samples = estimate(num_samples, target_variable, evidence=X)
-
-        # Обновление условных вероятностей на основе образцов
-        for sample in samples:
-            for node, value in sample.items():
-                if node != target_variable:
-                    model.set_cpt(node, {value: (sample.count(value) / num_samples)})
-
-        return model
-
     def __str__(self):
         """
         Print on stdout the structure of the network.
@@ -175,17 +159,15 @@ class BayesNetwork:
     def plot(self):
         """
         Plot the graph of the network.
-
         """
 
         # convert graph to graphviz
-        A = nx.nx_agraph.to_agraph(self.g)
-        A.layout('dot')
+        graph = nx.nx_agraph.to_agraph(self.g)
+        graph.layout('dot')
 
         # change color
-        for node in A.iternodes():
+        for node in graph.iternodes():
             node.attr['color'] = 'lightblue'
             node.attr['style'] = 'filled'
-            node.attr['fontname'] = 'Futura'
 
-        return A
+        return graph
