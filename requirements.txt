@@ -1,0 +1,8 @@
+graphviz
+pygraphviz
+numpy==1.26.4
+networkx
+pandas
+scikit-learn
+jupyter
+bnlearn
